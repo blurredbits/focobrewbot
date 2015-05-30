@@ -1,13 +1,5 @@
 Lita.configure do |config|
-  # The name your robot will use.
-  config.robot.name = "brewbot"
-
-  # The locale code for the language to use.
-  # config.robot.locale = :en
-
-  # The severity of messages to log. Options are:
-  # :debug, :info, :warn, :error, :fatal
-  # Messages at the selected level and above will be logged.
+  
   config.robot.log_level = :info
 
   # An array of user IDs that are considered administrators. These users
@@ -18,6 +10,13 @@ Lita.configure do |config|
   # The adapter you want to connect with. Make sure you've added the
   # appropriate gem to the Gemfile.
   config.robot.adapter = :shell
+
+  Lita.configure do |config|
+    config.robot.adapter = :slack
+    config.adapters.slack.token = ENV["SLACK_TOKEN"]
+    config.redis[:url] = ENV["REDISTOGO_URL"]
+    config.http.port = ENV["PORT"]
+  end
 
   ## Example: Set options for the chosen adapter.
   # config.adapter.username = "myname"
